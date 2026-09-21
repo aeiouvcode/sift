@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="popup.css">
+  <title>Sift</title>
+</head>
+<body>
+  <header>
+    <div class="brand"><span class="mark"></span>Sift</div>
+    <label class="switch" title="Enable Sift">
+      <input type="checkbox" id="enabled">
+      <span class="track"></span>
+    </label>
+  </header>
+
+  <section class="block">
+    <div class="block-title">Your filters</div>
+    <ul id="filters"></ul>
+    <form id="add-form">
+      <input id="new-filter" type="text" placeholder='e.g. "crypto", "rage politics"' autocomplete="off">
+      <button type="submit" aria-label="Add filter">+</button>
+    </form>
+  </section>
+
+  <section class="block row-block">
+    <button id="view-filtered" class="ghost">View filtered <span id="count" class="count">0</span></button>
+    <button id="open-settings" class="ghost">Settings</button>
+  </section>
+
+  <div id="provider-note" class="note"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
