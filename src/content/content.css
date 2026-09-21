@@ -1,0 +1,218 @@
+/* Sift - in-page UI. Minimal, theme-aware, out of the way. */
+
+.sift-pill {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f1419;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  font: 500 13px/1 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  user-select: none;
+  backdrop-filter: blur(8px);
+  transition: transform 0.15s ease;
+}
+.sift-pill:hover { transform: translateY(-1px); }
+.sift-pill-funnel { display: flex; opacity: 0.7; }
+.sift-pill-count {
+  background: #e8e4f5;
+  color: #4c3f91;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+.sift-pill-error .sift-pill-count { background: #fde2e1; color: #b3261e; }
+
+@media (prefers-color-scheme: dark) {
+  .sift-pill {
+    background: rgba(22, 24, 28, 0.92);
+    color: #e7e9ea;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  }
+  .sift-pill-count { background: #37324e; color: #cfc6f2; }
+  .sift-pill-error .sift-pill-count { background: #4a1d1b; color: #f2b8b5; }
+}
+
+/* placeholder row that replaces a hidden post */
+.sift-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+  padding: 8px 16px;
+  font: 400 13px/1.4 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #536471;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+  animation: sift-fade 0.25s ease;
+}
+@keyframes sift-fade { from { opacity: 0; } to { opacity: 1; } }
+.sift-ph-dot { width: 6px; height: 6px; border-radius: 50%; background: #9b8fd4; flex: none; }
+.sift-ph-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sift-ph-reason { opacity: 0.75; }
+.sift-ph-restore, .sift-card-restore {
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  background: transparent;
+  color: inherit;
+  border-radius: 999px;
+  padding: 3px 12px;
+  font: 600 12px/1.5 inherit;
+  cursor: pointer;
+  flex: none;
+}
+.sift-ph-restore:hover, .sift-card-restore:hover { background: rgba(128, 128, 128, 0.12); }
+@media (prefers-color-scheme: dark) { .sift-placeholder { color: #8b98a5; } }
+
+/* quick action button inside each post's action row */
+.sift-quick-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: 8px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #536471;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.sift-quick-btn:hover { background: rgba(155, 143, 212, 0.15); color: #6d5bd0; }
+@media (prefers-color-scheme: dark) { .sift-quick-btn { color: #8b98a5; } }
+
+/* quick menu */
+.sift-quick-menu {
+  position: absolute;
+  z-index: 9999;
+  width: 230px;
+  padding: 6px;
+  border-radius: 14px;
+  background: #fff;
+  color: #0f1419;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+  font: 500 14px/1.4 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+.sift-qm-title {
+  padding: 8px 10px 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #536471;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.sift-quick-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: inherit;
+  padding: 9px 10px;
+  border-radius: 9px;
+  font: inherit;
+  cursor: pointer;
+}
+.sift-quick-menu button:hover { background: rgba(155, 143, 212, 0.14); }
+@media (prefers-color-scheme: dark) {
+  .sift-quick-menu { background: #16181c; color: #e7e9ea; border-color: rgba(255, 255, 255, 0.1); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6); }
+  .sift-qm-title { color: #8b98a5; }
+}
+
+/* filtered drawer */
+.sift-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(380px, 92vw);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #0f1419;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+  font: 400 14px/1.45 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  transform: translateX(105%);
+  transition: transform 0.22s ease;
+}
+.sift-drawer.open { transform: translateX(0); }
+.sift-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  font-weight: 700;
+  font-size: 15px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+}
+.sift-drawer-head-btns { display: flex; gap: 4px; }
+.sift-drawer-settings, .sift-drawer-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.sift-drawer-settings:hover, .sift-drawer-close:hover { background: rgba(128, 128, 128, 0.12); }
+.sift-drawer-body { flex: 1; overflow-y: auto; padding: 10px 12px; }
+.sift-drawer-empty { padding: 30px 16px; color: #536471; font-size: 13.5px; text-align: center; }
+.sift-card {
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+.sift-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.sift-card-filter {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #6d5bd0;
+  background: rgba(155, 143, 212, 0.16);
+  border-radius: 999px;
+  padding: 2px 9px;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sift-card-text { font-size: 13.5px; }
+.sift-card-reason { margin-top: 6px; font-size: 12.5px; color: #536471; }
+@media (prefers-color-scheme: dark) {
+  .sift-drawer { background: #16181c; color: #e7e9ea; border-left-color: rgba(255, 255, 255, 0.1); box-shadow: -8px 0 30px rgba(0, 0, 0, 0.6); }
+  .sift-drawer-empty, .sift-card-reason { color: #8b98a5; }
+  .sift-card-filter { color: #cfc6f2; background: rgba(155, 143, 212, 0.22); }
+}
+
+/* toast */
+.sift-toast {
+  position: fixed;
+  bottom: 70px;
+  right: 18px;
+  z-index: 9999;
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: #2e2a45;
+  color: #f1eefb;
+  font: 500 13px/1.4 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+.sift-toast.show { opacity: 1; transform: translateY(0); }
